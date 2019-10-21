@@ -29,8 +29,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- just remember to place animateLayoutChanges everywhere -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +41,8 @@
                 android:layout_gravity="bottom"
                 android:id="@+id/profile_name"
                 android:text="Joe Bloggs"
-                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 android:textColor="?colorPrimaryDark"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -54,12 +53,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:textSize="@dimen/view_profile_text_size"
                 android:textColor="?colorPrimaryDark"
                 android:drawableStart="@drawable/ic_location_on_24dp"
                 android:drawablePadding="@dimen/drawable_padding"
-                android:id="@+id/distance"
+                android:id="@+id/profile_distance"
                 android:layout_marginBottom="10dp"
                 android:text="52 miles away"/>
 
