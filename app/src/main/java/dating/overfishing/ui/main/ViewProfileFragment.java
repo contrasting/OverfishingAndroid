@@ -40,19 +40,19 @@ public class ViewProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.view_profile_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_view_profile, container, false);
         setViewPager(rootView);
         LinearLayout itemsContainer = rootView.findViewById(R.id.profile_items_container);
         mName = itemsContainer.findViewById(R.id.profile_name);
         mDistance = itemsContainer.findViewById(R.id.profile_distance);
 
-        mAbout = (TextView) inflater.inflate(R.layout.item_profile_field, null);
-        mAbout.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_info_outline_24dp, 0, 0, 0);
-        itemsContainer.addView(mAbout);
-
         mSchool = (TextView) inflater.inflate(R.layout.item_profile_field, null);
         mSchool.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_school_24dp, 0, 0, 0);
         itemsContainer.addView(mSchool);
+
+        mAbout = (TextView) inflater.inflate(R.layout.item_profile_field, null);
+        mAbout.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_info_outline_24dp, 0, 0, 0);
+        itemsContainer.addView(mAbout);
 
         return rootView;
     }
