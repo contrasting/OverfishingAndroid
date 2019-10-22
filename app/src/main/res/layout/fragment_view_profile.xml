@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/content_profile"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MESSAGE"
+        app:icon="@drawable/ic_fishing_rod"
+        app:iconTint="?colorPrimary"
+        android:text="Catch"
         android:textSize="@dimen/view_profile_text_size"
         android:textColor="?colorPrimary"
         android:backgroundTint="?colorAccent"
-        android:layout_margin="@dimen/padding_master"
+        android:layout_margin="@dimen/fab_padding"
         android:layout_gravity="bottom|center"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_master"
+        android:layout_margin="@dimen/fab_padding"
         android:layout_gravity="bottom"
         android:src="@drawable/ic_close_24dp"
         android:backgroundTint="?colorPrimary"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_padding"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_push_pin"
+        android:backgroundTint="@android:color/holo_green_dark"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

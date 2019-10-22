@@ -3,12 +3,12 @@
     <item android:id="@+id/action_discover"
         android:title="Discover"
         android:icon="@drawable/ic_fish"/>
-    <item android:id="@+id/action_chats"
-        android:title="Chats"
-        android:icon="@drawable/ic_chat_bubble_24dp"/>
     <item android:id="@+id/action_filters"
         android:title="Filters"
         android:icon="@drawable/ic_tune_24dp"/>
+    <item android:id="@+id/action_chats"
+        android:title="Chats"
+        android:icon="@drawable/ic_chat_bubble_24dp"/>
     <item android:id="@+id/action_profile"
         android:title="Profile"
         android:icon="@drawable/ic_account_circle_24dp"/>

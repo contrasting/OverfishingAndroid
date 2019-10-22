@@ -16,7 +16,6 @@
             <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@drawable/ic_fish"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 android:id="@+id/profile_image_pager"/>
@@ -68,6 +67,12 @@
                 android:background="?colorPrimaryDark"/>
 
         </LinearLayout>
+
+        <!-- pad to be able to scroll down -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
 
     </LinearLayout>
 
