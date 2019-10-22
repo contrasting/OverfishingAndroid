@@ -6,6 +6,7 @@ public class UserProfile {
 
     private List<String> profileImages;
 
+    private String id;
     private String name;
     private Integer age;
     private Integer distance;
@@ -28,6 +29,10 @@ public class UserProfile {
 
     public String getAbout() {
         return about;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

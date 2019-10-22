@@ -18,6 +18,7 @@
         android:layout_margin="@dimen/fab_padding"
         android:layout_gravity="bottom|center"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+        android:id="@+id/view_profile_catch"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +28,7 @@
         android:layout_gravity="bottom"
         android:src="@drawable/ic_close_24dp"
         android:backgroundTint="?colorPrimary"
+        android:id="@+id/view_profile_no"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -36,6 +38,7 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_push_pin"
         android:backgroundTint="@android:color/holo_green_dark"
+        android:id="@+id/view_profile_pin"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
