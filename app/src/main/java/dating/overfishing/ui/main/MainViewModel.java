@@ -2,11 +2,6 @@ package dating.overfishing.ui.main;
 
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Queue;
-
 import dating.overfishing.data.FakeUserData;
 import dating.overfishing.data.UserDataProvider;
 import dating.overfishing.data.UserProfile;
@@ -21,21 +16,18 @@ public class MainViewModel extends ViewModel {
     }
 
     public void passUser(String userId) {
-        nextUser();
-        mDataProvider.passUserWithId();
+        mDataProvider.passUserWithId(userId);
     }
 
     public void likeUser(String userId) {
-        nextUser();
-        mDataProvider.likeUserWithId();
+        mDataProvider.likeUserWithId(userId);
     }
 
     public void pinUser(String userId) {
-        nextUser();
-        mDataProvider.pinUserWithId();
+        mDataProvider.pinUserWithId(userId);
     }
 
-    private void nextUser() {
-        mDataProvider.moveOnToNext();
+    public UserProfile nextUser() {
+        return mDataProvider.moveOnToNext();
     }
 }

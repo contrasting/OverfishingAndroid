@@ -37,8 +37,9 @@ public class FakeUserData implements UserDataProvider {
     }
 
     @Override
-    public synchronized void moveOnToNext() {
+    public synchronized UserProfile moveOnToNext() {
         mCurrentProfile = mUserProfiles.poll();
+        return mCurrentProfile;
     }
 
     @Override
@@ -47,17 +48,17 @@ public class FakeUserData implements UserDataProvider {
     }
 
     @Override
-    public void passUserWithId() {
+    public void passUserWithId(String id) {
 
     }
 
     @Override
-    public void likeUserWithId() {
+    public void likeUserWithId(String id) {
 
     }
 
     @Override
-    public void pinUserWithId() {
+    public void pinUserWithId(String id) {
 
     }
 }

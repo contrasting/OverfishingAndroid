@@ -1,5 +1,6 @@
 package dating.overfishing.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +15,42 @@ import dating.overfishing.data.UserProfile;
 
 public class ViewProfileFragment extends AbstractViewProfileFragment {
 
+    public static final String PROFILE = "profile";
     private String mUserId;
 
-    public static AbstractViewProfileFragment newInstance() {
-        return new ViewProfileFragment();
+    public interface ProfileActionListener {
+        void likeUser(String id);
+        void passUser(String id);
+        void pinUser(String id);
+    }
+
+    private ProfileActionListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (ProfileActionListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement " + getClass().getSimpleName());
+        }
+    }
+
+    public static ViewProfileFragment newInstance(UserProfile profile) {
+        ViewProfileFragment vpf = new ViewProfileFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(PROFILE, profile);
+        vpf.setArguments(args);
+        return vpf;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // note that we scope the ViewModel to the activity, not to this fragment
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-        UserProfile profile = mViewModel.getLatestUserProfile();
 
+        UserProfile profile = (UserProfile) getArguments().getSerializable(PROFILE);
+
+        // should not be null
         if (profile != null) {
             mUserId = profile.getId();
             displayUserProfile(profile);
@@ -38,28 +62,17 @@ public class ViewProfileFragment extends AbstractViewProfileFragment {
         View rootView = inflater.inflate(R.layout.fragment_view_profile, container, false);
 
         rootView.findViewById(R.id.view_profile_catch).setOnClickListener(v -> {
-            mViewModel.likeUser(mUserId);
-            nextProfile();
+            mListener.likeUser(mUserId);
         });
 
         rootView.findViewById(R.id.view_profile_no).setOnClickListener(v -> {
-            mViewModel.passUser(mUserId);
-            nextProfile();
+            mListener.passUser(mUserId);
         });
 
         rootView.findViewById(R.id.view_profile_pin).setOnClickListener(v -> {
-            mViewModel.pinUser(mUserId);
-            nextProfile();
+            mListener.pinUser(mUserId);
         });
 
         return rootView;
-    }
-
-    private void nextProfile() {
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, newInstance())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
     }
 }

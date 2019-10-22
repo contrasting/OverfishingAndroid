@@ -1,8 +1,9 @@
 package dating.overfishing.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class UserProfile {
+public class UserProfile implements Serializable {
 
     private List<String> profileImages;
 

@@ -8,8 +8,8 @@ public class RealUserData implements UserDataProvider {
     private Queue<UserProfile> mUserProfiles = new ArrayDeque<>();
 
     @Override
-    public void moveOnToNext() {
-
+    public UserProfile moveOnToNext() {
+        return null;
     }
 
     @Override
@@ -18,17 +18,17 @@ public class RealUserData implements UserDataProvider {
     }
 
     @Override
-    public void passUserWithId() {
+    public void passUserWithId(String id) {
 
     }
 
     @Override
-    public void likeUserWithId() {
+    public void likeUserWithId(String id) {
 
     }
 
     @Override
-    public void pinUserWithId() {
+    public void pinUserWithId(String id) {
 
     }
 }

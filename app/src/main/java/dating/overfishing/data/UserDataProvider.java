@@ -2,13 +2,15 @@ package dating.overfishing.data;
 
 public interface UserDataProvider {
 
-    void moveOnToNext();
-
+    // if no action, retrieve the last
     UserProfile getLast();
 
-    void passUserWithId();
+    // if action from user, retrieve the next
+    UserProfile moveOnToNext();
 
-    void likeUserWithId();
+    void passUserWithId(String id);
 
-    void pinUserWithId(); // can be done locally
+    void likeUserWithId(String id);
+
+    void pinUserWithId(String id); // can be done locally
 }
