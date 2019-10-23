@@ -31,4 +31,9 @@ public class RealUserData implements UserDataProvider {
     public void pinUserWithId(String id) {
 
     }
+
+    @Override
+    public UserProfile getOwnProfile() {
+        return null;
+    }
 }

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import dating.overfishing.R;
@@ -18,6 +20,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public abstract class AbstractViewProfileFragment extends Fragment {
 
+    public static final String PROFILE = "profile";
     protected MainViewModel mViewModel;
     protected TextView mName;
     protected TextView mDistance;
@@ -26,6 +29,13 @@ public abstract class AbstractViewProfileFragment extends Fragment {
     private ViewPager mProfilePager;
     private CircleIndicator mIndicator;
     private ProfileImageAdapter mPagerAdapter;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // note scope ViewModel to activity instead of this
+        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+    }
 
     // observe: this is how to add views programmatically
 
@@ -66,10 +76,10 @@ public abstract class AbstractViewProfileFragment extends Fragment {
             mDistance.setVisibility(View.VISIBLE);
         }
 
-         if (profile.getAbout() != null) {
-             mAbout.setText(profile.getAbout());
-             mAbout.setVisibility(View.VISIBLE);
-         }
+        if (profile.getAbout() != null) {
+            mAbout.setText(profile.getAbout());
+            mAbout.setVisibility(View.VISIBLE);
+        }
 
         if (profile.getSchool() != null) {
             mSchool.setText(profile.getSchool());

@@ -13,4 +13,6 @@ public interface UserDataProvider {
     void likeUserWithId(String id);
 
     void pinUserWithId(String id); // can be done locally
+
+    UserProfile getOwnProfile();
 }

@@ -3,6 +3,7 @@ package dating.overfishing.data;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 
 public class FakeUserData implements UserDataProvider {
@@ -24,13 +25,12 @@ public class FakeUserData implements UserDataProvider {
 
         mUserProfiles.add(
                 new UserProfile(new ArrayList<>(
-                        Arrays.asList("https://petapixel.com/assets/uploads/2019/02/mooncompositemain-800x800.jpg",
-                                "https://i5.walmartimages.com/asr/49d44f88-30e4-4bdd-a89d-74f795d3efdc_1.4739ce0b7de1063bc98c6091137e7ad3.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF")),
-                        "Fred",
-                        25,
-                        5,
-                        "Hi it's me I made this app",
-                        "University of Cambridge"
+                        Collections.singleton("https://t5.rbxcdn.com/1eed2d39e12b7c67baedb0f643a7a839")),
+                        "Legoi",
+                        16,
+                        3,
+                        "Oh my god this is so ah wtefa; sldkfj!!!",
+                        "University of Wfoslefj"
                 )
         );
         mCurrentProfile = mUserProfiles.poll();
@@ -60,5 +60,18 @@ public class FakeUserData implements UserDataProvider {
     @Override
     public void pinUserWithId(String id) {
 
+    }
+
+    @Override
+    public UserProfile getOwnProfile() {
+        return new UserProfile(new ArrayList<>(
+                Arrays.asList("https://petapixel.com/assets/uploads/2019/02/mooncompositemain-800x800.jpg",
+                        "https://i5.walmartimages.com/asr/49d44f88-30e4-4bdd-a89d-74f795d3efdc_1.4739ce0b7de1063bc98c6091137e7ad3.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF")),
+                "Fred",
+                25,
+                5,
+                "Hi it's me I made this app",
+                "University of Cambridge"
+        );
     }
 }
