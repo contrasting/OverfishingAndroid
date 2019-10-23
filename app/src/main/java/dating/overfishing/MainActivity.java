@@ -5,12 +5,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dating.overfishing.data.UserProfile;
+import dating.overfishing.ui.main.FiltersFragment;
 import dating.overfishing.ui.main.MainViewModel;
 import dating.overfishing.ui.main.NoUsersFragment;
 import dating.overfishing.ui.main.OwnProfileFragment;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mViewModel.getCurrentProfile().observe(this, this::displayDiscover);
@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.action_profile:
                     displayFragment(OwnProfileFragment.newInstance());
+                    break;
+                case R.id.action_filters:
+                    displayFragment(FiltersFragment.newInstance());
                     break;
                 default:
             }
