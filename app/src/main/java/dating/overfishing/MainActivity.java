@@ -19,6 +19,7 @@ import dating.overfishing.ui.main.ViewProfileFragment;
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mViewModel;
+    private Class<? extends Fragment> mActiveFragmentClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +28,27 @@ public class MainActivity extends AppCompatActivity {
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mViewModel.getCurrentProfile().observe(this, this::displayDiscover);
+        mActiveFragmentClass = ViewProfileFragment.class;
 
         ((BottomNavigationView) findViewById(R.id.bottom_nav_view)).setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_discover:
-                    displayDiscover(mViewModel.getCurrentProfile().getValue());
+                    if (mActiveFragmentClass != ViewProfileFragment.class) {
+                        displayDiscover(mViewModel.getCurrentProfile().getValue());
+                        mActiveFragmentClass = ViewProfileFragment.class;
+                    }
                     break;
                 case R.id.action_profile:
-                    displayFragment(OwnProfileFragment.newInstance());
+                    if (mActiveFragmentClass != OwnProfileFragment.class) {
+                        displayFragment(OwnProfileFragment.newInstance());
+                        mActiveFragmentClass = OwnProfileFragment.class;
+                    }
                     break;
                 case R.id.action_filters:
-                    displayFragment(FiltersFragment.newInstance());
+                    if (mActiveFragmentClass != FiltersFragment.class) {
+                        displayFragment(FiltersFragment.newInstance());
+                        mActiveFragmentClass = FiltersFragment.class;
+                    }
                     break;
                 default:
             }
