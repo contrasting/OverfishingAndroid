@@ -8,7 +8,9 @@ import dating.overfishing.data.FakeUserData;
 import dating.overfishing.data.UserDataProvider;
 import dating.overfishing.data.UserProfile;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends ViewModel implements UserDataProvider.Listener {
+
+    // TODO need to check whether network connection
 
     private MutableLiveData<UserProfile> mCurrentProfile = new MutableLiveData<>();
 
@@ -17,7 +19,7 @@ public class MainViewModel extends ViewModel {
     }
 
     // TODO replace with real
-    private UserDataProvider mDataProvider = new FakeUserData();
+    private UserDataProvider mDataProvider = new FakeUserData(this);
 
     public void passUser(String userId) {
         mDataProvider.passUserWithId(userId);
@@ -42,12 +44,17 @@ public class MainViewModel extends ViewModel {
         return mDataProvider.getOwnProfile();
     }
 
-    // Note we do not expose MutableLiveData but only the super pointer
+    // Note we do not expose MutableLiveData but only LiveData
     public LiveData<UserProfile> getCurrentProfile() {
         return mCurrentProfile;
     }
 
     public void refresh() {
+        mDataProvider.getMoreUsers(null);
+    }
 
+    @Override
+    public void onMoreUsersFound(UserProfile profile) {
+        mCurrentProfile.setValue(profile);
     }
 }

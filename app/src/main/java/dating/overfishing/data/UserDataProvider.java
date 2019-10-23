@@ -8,11 +8,22 @@ public interface UserDataProvider {
     // if action from user, retrieve the next
     UserProfile moveOnToNext();
 
+    // network call
     void passUserWithId(String id);
 
+    // network call
     void likeUserWithId(String id);
 
-    void pinUserWithId(String id); // can be done locally
+    // can be done locally
+    void pinUserWithId(String id);
 
     UserProfile getOwnProfile();
+
+    // network call
+    void getMoreUsers(Filter filter);
+
+    // callback to host
+    interface Listener {
+        void onMoreUsersFound(UserProfile profile);
+    }
 }
