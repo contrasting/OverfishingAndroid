@@ -21,6 +21,7 @@ public class FiltersFragment extends Fragment {
 
     public static final String AGE_PREF_MAX = "agePrefMax";
     public static final String AGE_PREF_MIN = "agePrefMin";
+    public static final String DISTANCE_PREF = "distancePref";
 
     private SharedPreferences mPreferences;
     private int mAgeMin;
@@ -43,18 +44,40 @@ public class FiltersFragment extends Fragment {
         LinearLayout itemsContainer = rootView.findViewById(R.id.filter_items_container);
 
         setAgePref(itemsContainer, inflater);
+        setDistancePref(itemsContainer, inflater);
 
         return rootView;
     }
 
-    private void setAgePref(LinearLayout container, LayoutInflater inflater) {
+    private void setDistancePref(LinearLayout itemsContainer, LayoutInflater inflater) {
+
+        CardView distContainer = getSeekBarPref(inflater, "Distance");
+        TextView distValue = distContainer.findViewById(R.id.seekbar_pref_value);
+        MultiSlider slider = distContainer.findViewById(R.id.seekbar_pref_slider);
+
+        int distanceRange = mPreferences.getInt(DISTANCE_PREF, 30);
+
+        slider.setMax(100);
+        slider.setMin(1);
+        slider.setNumberOfThumbs(1);
+        slider.getThumb(0).setValue(distanceRange);
+
+        distValue.setText(distanceRange + " miles");
+
+        slider.setOnThumbValueChangeListener((multiSlider, thumb, thumbIndex, value) -> {
+            mPreferences.edit().putInt(DISTANCE_PREF, value).apply();
+            distValue.setText(value + " miles");
+        });
+
+        itemsContainer.addView(distContainer);
+    }
+
+    private void setAgePref(LinearLayout itemsContainer, LayoutInflater inflater) {
 
         mAgeMin = mPreferences.getInt(AGE_PREF_MIN, 18);
         mAgeMax = mPreferences.getInt(AGE_PREF_MAX, 30);
 
-        CardView ageContainer = (CardView) inflater.inflate(R.layout.item_filter_seekbar, null);
-
-        ((TextView) ageContainer.findViewById(R.id.seekbar_pref_name)).setText("Age");
+        CardView ageContainer = getSeekBarPref(inflater, "Age");
         TextView ageValue = ageContainer.findViewById(R.id.seekbar_pref_value);
         MultiSlider slider = ageContainer.findViewById(R.id.seekbar_pref_slider);
 
@@ -80,7 +103,20 @@ public class FiltersFragment extends Fragment {
                 }
         );
 
-        container.addView(ageContainer);
+        itemsContainer.addView(ageContainer);
+    }
+
+    private CardView getSeekBarPref(LayoutInflater inflater, String name) {
+        CardView ageContainer = (CardView) inflater.inflate(R.layout.item_filter_seekbar, null);
+        ((TextView) ageContainer.findViewById(R.id.seekbar_pref_name)).setText(name);
+
+        // margins must be set programmatically since root not passed
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen.padding_master));
+        ageContainer.setLayoutParams(layoutParams);
+
+        return ageContainer;
     }
 
     private void displayAgeRange(TextView ageText) {

@@ -2,8 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/padding_master">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
