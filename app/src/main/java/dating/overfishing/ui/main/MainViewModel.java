@@ -1,20 +1,24 @@
 package dating.overfishing.ui.main;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import dating.overfishing.data.FakeUserData;
+import dating.overfishing.data.Filters;
 import dating.overfishing.data.UserDataProvider;
 import dating.overfishing.data.UserProfile;
 
-public class MainViewModel extends ViewModel implements UserDataProvider.Listener {
+public class MainViewModel extends AndroidViewModel implements UserDataProvider.Listener {
 
     // TODO need to check whether network connection
 
     private MutableLiveData<UserProfile> mCurrentProfile = new MutableLiveData<>();
 
-    public MainViewModel() {
+    public MainViewModel(Application application) {
+        super(application);
         mCurrentProfile.postValue(mDataProvider.getLast());
     }
 
@@ -50,7 +54,7 @@ public class MainViewModel extends ViewModel implements UserDataProvider.Listene
     }
 
     public void refresh() {
-        mDataProvider.getMoreUsers(null);
+        mDataProvider.getMoreUsers(new Filters(getApplication()));
     }
 
     @Override

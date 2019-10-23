@@ -38,7 +38,7 @@ public class RealUserData implements UserDataProvider {
     }
 
     @Override
-    public void getMoreUsers(Filter filter) {
+    public void getMoreUsers(Filters filters) {
 
     }
 }

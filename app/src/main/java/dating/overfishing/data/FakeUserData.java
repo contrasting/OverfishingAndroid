@@ -82,7 +82,7 @@ public class FakeUserData implements UserDataProvider {
     }
 
     @Override
-    public void getMoreUsers(Filter filter) {
+    public void getMoreUsers(Filters filters) {
         addFakeUsers();
         mListener.onMoreUsersFound(mCurrentProfile);
     }

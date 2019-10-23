@@ -20,7 +20,7 @@ public interface UserDataProvider {
     UserProfile getOwnProfile();
 
     // network call
-    void getMoreUsers(Filter filter);
+    void getMoreUsers(Filters filters);
 
     // callback to host
     interface Listener {

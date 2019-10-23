@@ -22,6 +22,9 @@ public class FiltersFragment extends Fragment {
     public static final String AGE_PREF_MAX = "agePrefMax";
     public static final String AGE_PREF_MIN = "agePrefMin";
     public static final String DISTANCE_PREF = "distancePref";
+    public static final int AGE_MIN_DEF = 18;
+    public static final int AGE_MAX_DEF = 30;
+    public static final int DIST_DEF = 30;
 
     private SharedPreferences mPreferences;
     private int mAgeMin;
@@ -55,7 +58,7 @@ public class FiltersFragment extends Fragment {
         TextView distValue = distContainer.findViewById(R.id.seekbar_pref_value);
         MultiSlider slider = distContainer.findViewById(R.id.seekbar_pref_slider);
 
-        int distanceRange = mPreferences.getInt(DISTANCE_PREF, 30);
+        int distanceRange = mPreferences.getInt(DISTANCE_PREF, DIST_DEF);
 
         slider.setMax(100);
         slider.setMin(1);
@@ -74,8 +77,8 @@ public class FiltersFragment extends Fragment {
 
     private void setAgePref(LinearLayout itemsContainer, LayoutInflater inflater) {
 
-        mAgeMin = mPreferences.getInt(AGE_PREF_MIN, 18);
-        mAgeMax = mPreferences.getInt(AGE_PREF_MAX, 30);
+        mAgeMin = mPreferences.getInt(AGE_PREF_MIN, AGE_MIN_DEF);
+        mAgeMax = mPreferences.getInt(AGE_PREF_MAX, AGE_MAX_DEF);
 
         CardView ageContainer = getSeekBarPref(inflater, "Age");
         TextView ageValue = ageContainer.findViewById(R.id.seekbar_pref_value);
