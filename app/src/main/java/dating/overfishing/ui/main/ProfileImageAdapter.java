@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.palette.graphics.Palette;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.github.florent37.glidepalette.GlidePalette;
 
 import java.util.List;
 
@@ -17,7 +19,18 @@ import dating.overfishing.R;
 
 public class ProfileImageAdapter extends PagerAdapter {
 
+    public interface PaletteListener {
+        void onPaletteLoaded(Palette palette);
+    }
+
+    private PaletteListener mPaletteListener;
+
+    public ProfileImageAdapter(PaletteListener paletteListener) {
+        mPaletteListener = paletteListener;
+    }
+
     private List<String> mImages;
+    private Palette[] mPalettes;
 
     @Override
     public int getCount() {
@@ -43,6 +56,11 @@ public class ProfileImageAdapter extends PagerAdapter {
                 .load(mImages.get(position))
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
+                .listener(GlidePalette.with(mImages.get(position))
+                        .intoCallBack(palette -> {
+                            mPalettes[position] = palette;
+                            if (position == 0) mPaletteListener.onPaletteLoaded(palette);
+                        }))
                 .into(img);
 
         container.addView(layoutView); // is this necessary? edit: yes
@@ -57,7 +75,12 @@ public class ProfileImageAdapter extends PagerAdapter {
 
     public void setImages(List<String> images) {
         mImages = images;
+        mPalettes = new Palette[mImages.size()];
         notifyDataSetChanged();
+    }
+
+    public Palette getPaletteAt(int position) {
+        return mPalettes[position];
     }
 
 }

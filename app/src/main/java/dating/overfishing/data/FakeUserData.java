@@ -25,7 +25,7 @@ public class FakeUserData implements UserDataProvider {
                         "Argha",
                         25,
                         23,
-                        "Technology entrepreneur. \n\nGamer and traveller. 13 countries and counting \nThird culture kid and trilingual",
+                        "Technology entrepreneur. \n\nGamer and traveller. 13 countries and counting \n\nThird culture kid and trilingual",
                         "Warwick University")
         );
 

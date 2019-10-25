@@ -1,6 +1,10 @@
 package dating.overfishing.ui.main;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +14,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.palette.graphics.Palette;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import dating.overfishing.R;
 import dating.overfishing.data.UserProfile;
 import me.relex.circleindicator.CircleIndicator;
 
-public abstract class AbstractViewProfileFragment extends Fragment {
+public abstract class AbstractViewProfileFragment extends Fragment implements ProfileImageAdapter.PaletteListener {
 
-    public static final String PROFILE = "profile";
     protected MainViewModel mViewModel;
-    protected TextView mName;
     protected TextView mDistance;
     protected TextView mAbout;
     protected TextView mSchool;
+    protected CollapsingToolbarLayout mToolbarLayout;
     private ViewPager mProfilePager;
     private CircleIndicator mIndicator;
     private ProfileImageAdapter mPagerAdapter;
@@ -45,19 +50,22 @@ public abstract class AbstractViewProfileFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = getRootView(inflater, container);
         setViewPager(rootView);
+        setToolbarLayout(rootView);
+
         LinearLayout itemsContainer = rootView.findViewById(R.id.profile_items_container);
-        mName = itemsContainer.findViewById(R.id.profile_name);
-        mDistance = itemsContainer.findViewById(R.id.profile_distance);
+        mAbout = rootView.findViewById(R.id.profile_about);
 
-        mSchool = (TextView) inflater.inflate(R.layout.item_profile_field, null);
-        mSchool.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_school_24dp, 0, 0, 0);
-        itemsContainer.addView(mSchool);
-
-        mAbout = (TextView) inflater.inflate(R.layout.item_profile_field, null);
-        mAbout.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_info_outline_24dp, 0, 0, 0);
-        itemsContainer.addView(mAbout);
+        mDistance = addField(R.drawable.ic_location_on_24dp, inflater, itemsContainer);
+        mSchool = addField(R.drawable.ic_school_24dp, inflater, itemsContainer);
 
         return rootView;
+    }
+
+    private static TextView addField(int res, @NonNull LayoutInflater inflater, LinearLayout itemsContainer) {
+        TextView textView = (TextView) inflater.inflate(R.layout.item_profile_field, null);
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(res, 0, 0, 0);
+        itemsContainer.addView(textView);
+        return textView;
     }
 
     protected void displayUserProfile(UserProfile profile) {
@@ -67,8 +75,7 @@ public abstract class AbstractViewProfileFragment extends Fragment {
         }
 
         if (profile.getName() != null && profile.getAge() != null) {
-            mName.setText(profile.getName() + ", " + profile.getAge());
-            mName.setVisibility(View.VISIBLE);
+            mToolbarLayout.setTitle(profile.getName() + ", " + profile.getAge());
         }
 
         if (profile.getDistance() != null) {
@@ -87,15 +94,45 @@ public abstract class AbstractViewProfileFragment extends Fragment {
         }
     }
 
+    private void setToolbarLayout(View rootView) {
+        mToolbarLayout = rootView.findViewById(R.id.view_profile_toolbar_layout);
+        // mToolbarLayout.setExpandedTitleColor(getThemeAttribute(R.attr.colorPrimary, getContext()));
+        mToolbarLayout.setExpandedTitleTypeface(Typeface.DEFAULT_BOLD);
+        mToolbarLayout.setCollapsedTitleTextColor(getThemeAttribute(R.attr.colorPrimaryDark, getContext()));
+    }
+
     private void setViewPager(View rootView) {
         mProfilePager = rootView.findViewById(R.id.profile_image_pager);
         mIndicator = rootView.findViewById(R.id.profile_image_indicator);
-        mPagerAdapter = new ProfileImageAdapter();
+        mPagerAdapter = new ProfileImageAdapter(this);
         mProfilePager.setAdapter(mPagerAdapter);
         mIndicator.setViewPager(mProfilePager);
         //image list is empty at the moment, so no indicators are generated. We need to notify indicator as well
         mPagerAdapter.registerDataSetObserver(mIndicator.getDataSetObserver());
+        mProfilePager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                mToolbarLayout.setExpandedTitleColor(mPagerAdapter.getPaletteAt(position).getVibrantColor(Color.WHITE));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
     }
 
     protected abstract View getRootView(LayoutInflater inflater, ViewGroup container);
+
+    public static int getThemeAttribute(int attr, final Context context) {
+        final TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(attr, value, true);
+        return value.data;
+    }
+
+    @Override
+    public void onPaletteLoaded(Palette palette) {
+        mToolbarLayout.setExpandedTitleColor(palette.getVibrantColor(Color.WHITE));
+    }
 }
