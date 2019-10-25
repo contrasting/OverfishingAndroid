@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dating.overfishing.data.UserProfile;
+import dating.overfishing.ui.main.ChatsFragment;
 import dating.overfishing.ui.main.FiltersFragment;
 import dating.overfishing.ui.main.MainViewModel;
 import dating.overfishing.ui.main.NoUsersFragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.action_discover:
                     if (mActiveFragmentClass != ViewProfileFragment.class) {
+                        // TODO track whether filters have changed, if so refresh
                         displayDiscover(mViewModel.getCurrentProfile().getValue());
                         mActiveFragmentClass = ViewProfileFragment.class;
                     }
@@ -48,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
                     if (mActiveFragmentClass != FiltersFragment.class) {
                         displayFragment(FiltersFragment.newInstance());
                         mActiveFragmentClass = FiltersFragment.class;
+                    }
+                    break;
+                case R.id.action_chats:
+                    if (mActiveFragmentClass != ChatsFragment.class) {
+                        displayFragment(ChatsFragment.newInstance());
+                        mActiveFragmentClass = ChatsFragment.class;
                     }
                     break;
                 default:

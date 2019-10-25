@@ -31,7 +31,7 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
     }
 
     public void likeUser(String userId) {
-        mDataProvider.likeUserWithId(userId);
+        mDataProvider.likeUserWithId(userId, null);
         nextUser();
     }
 

@@ -12,7 +12,7 @@ public interface UserDataProvider {
     void passUserWithId(String id);
 
     // network call
-    void likeUserWithId(String id);
+    void likeUserWithId(String id, String message);
 
     // can be done locally
     void pinUserWithId(String id);

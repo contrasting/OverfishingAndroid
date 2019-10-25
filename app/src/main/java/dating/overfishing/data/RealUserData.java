@@ -23,7 +23,7 @@ public class RealUserData implements UserDataProvider {
     }
 
     @Override
-    public void likeUserWithId(String id) {
+    public void likeUserWithId(String id, String message) {
 
     }
 

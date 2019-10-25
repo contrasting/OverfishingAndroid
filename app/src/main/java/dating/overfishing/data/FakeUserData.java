@@ -25,7 +25,7 @@ public class FakeUserData implements UserDataProvider {
                         "Argha",
                         25,
                         23,
-                        "I only like Indian girls who are immigrants lololololol",
+                        "Technology entrepreneur. \n\nGamer and traveller. 13 countries and counting \nThird culture kid and trilingual",
                         "Warwick University")
         );
 
@@ -59,7 +59,7 @@ public class FakeUserData implements UserDataProvider {
     }
 
     @Override
-    public void likeUserWithId(String id) {
+    public void likeUserWithId(String id, String message) {
 
     }
 

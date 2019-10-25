@@ -1,66 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <!--  note layout_behavior attribute which moves ScrollView down  -->
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/filter_items_container"
-        android:padding="@dimen/padding_master">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_master">
+            android:orientation="vertical"
+            android:id="@+id/filter_items_container"
+            android:padding="@dimen/padding_master">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/fab_padding"
-                android:orientation="vertical">
+                android:layout_marginBottom="@dimen/padding_master">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/drawable_padding"
-                    android:text="Gender Preference"
-                    android:textColor="?colorPrimaryDark"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/view_profile_text_size"
-                    />
+                    android:padding="@dimen/fab_padding"
+                    android:orientation="vertical">
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/gender_radio"
-                    >
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Male"
-                        android:paddingLeft="@dimen/padding_master"
-                        android:id="@+id/gender_preference_male"
+                        android:layout_marginBottom="@dimen/drawable_padding"
+                        android:text="Gender Preference"
+                        android:textColor="?colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/view_profile_text_size"
                         />
-                    <RadioButton
-                        android:layout_width="wrap_content"
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Female"
-                        android:paddingLeft="@dimen/padding_master"
-                        android:id="@+id/gender_preference_female"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Both"
-                        android:paddingLeft="@dimen/padding_master"
-                        android:id="@+id/gender_preference_both"/>
-                </RadioGroup>
+                        android:id="@+id/gender_radio"
+                        >
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Male"
+                            android:paddingLeft="@dimen/padding_master"
+                            android:id="@+id/gender_preference_male"
+                            />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Female"
+                            android:paddingLeft="@dimen/padding_master"
+                            android:id="@+id/gender_preference_female"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Both"
+                            android:paddingLeft="@dimen/padding_master"
+                            android:id="@+id/gender_preference_both"/>
+                    </RadioGroup>
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Filters"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
