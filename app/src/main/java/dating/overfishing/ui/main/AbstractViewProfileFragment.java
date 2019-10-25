@@ -115,7 +115,9 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
 
             @Override
             public void onPageSelected(int position) {
-                mToolbarLayout.setExpandedTitleColor(mPagerAdapter.getPaletteAt(position).getVibrantColor(Color.WHITE));
+                if (mPagerAdapter.getPaletteAt(position) != null) {
+                    mToolbarLayout.setExpandedTitleColor(mPagerAdapter.getPaletteAt(position).getVibrantColor(Color.WHITE));
+                }
             }
 
             @Override
