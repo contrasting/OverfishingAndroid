@@ -1,5 +1,7 @@
 package dating.overfishing.data;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public interface UserDataProvider {
@@ -26,6 +28,7 @@ public interface UserDataProvider {
 
     UserProfile getPinnedUser();
 
+    @NonNull
     List<UserProfile> getLikedUsers();
 
     // callback to host

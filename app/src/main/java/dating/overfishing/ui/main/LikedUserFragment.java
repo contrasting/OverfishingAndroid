@@ -12,12 +12,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import dating.overfishing.R;
+import dating.overfishing.data.UserProfile;
 
 public class LikedUserFragment extends Fragment {
 
     private MainViewModel mViewModel;
     private LikedUserAdapter mAdapter;
+    private View mNoUsers;
 
     public static LikedUserFragment newInstance() {
         return new LikedUserFragment();
@@ -27,7 +31,14 @@ public class LikedUserFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-        mAdapter.setUserProfiles(mViewModel.getLikedUsers());
+
+        List<UserProfile> likedUsersList = mViewModel.getLikedUsers();
+        if (likedUsersList.isEmpty()) {
+            mNoUsers.setVisibility(View.VISIBLE);
+        } else {
+            mAdapter.setUserProfiles(mViewModel.getLikedUsers());
+        }
+
     }
 
     @Nullable
@@ -35,6 +46,7 @@ public class LikedUserFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_liked_user, container, false);
         RecyclerView likedRecycler = rootView.findViewById(R.id.liked_recycler);
+        mNoUsers = rootView.findViewById(R.id.liked_no_users);
         mAdapter = new LikedUserAdapter();
         likedRecycler.setAdapter(mAdapter);
         likedRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
