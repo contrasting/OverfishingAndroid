@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:icon="@drawable/ic_fishing_rod"
+    app:iconTint="?colorPrimary"
+    android:text="Catch"
+    android:textColor="?colorPrimary"
+    android:backgroundTint="?colorAccent"
+    android:layout_margin="@dimen/fab_padding"
+    android:layout_gravity="bottom|center"
+    style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+    android:id="@+id/view_profile_catch"
+    tools:showIn="@layout/fragment_view_profile" />

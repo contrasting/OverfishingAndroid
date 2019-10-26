@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <include layout="@layout/content_profile"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:icon="@drawable/ic_fishing_rod"
-        app:iconTint="?colorPrimary"
-        android:text="Catch"
-        android:textColor="?colorPrimary"
-        android:backgroundTint="?colorAccent"
-        android:layout_margin="@dimen/fab_padding"
-        android:layout_gravity="bottom|center"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-        android:id="@+id/view_profile_catch"
-        />
+    <include layout="@layout/item_catch_button" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

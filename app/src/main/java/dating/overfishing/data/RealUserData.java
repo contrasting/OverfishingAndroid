@@ -41,4 +41,9 @@ public class RealUserData implements UserDataProvider {
     public void getMoreUsers(Filters filters) {
 
     }
+
+    @Override
+    public UserProfile getPinnedUser() {
+        return null;
+    }
 }

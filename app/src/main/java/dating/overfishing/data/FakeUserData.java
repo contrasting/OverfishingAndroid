@@ -87,4 +87,9 @@ public class FakeUserData implements UserDataProvider {
         mListener.onMoreUsersFound(mCurrentProfile);
     }
 
+    @Override
+    public UserProfile getPinnedUser() {
+        return getOwnProfile();
+    }
+
 }

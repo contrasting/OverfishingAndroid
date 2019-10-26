@@ -22,6 +22,8 @@ public interface UserDataProvider {
     // network call
     void getMoreUsers(Filters filters);
 
+    UserProfile getPinnedUser();
+
     // callback to host
     interface Listener {
         void onMoreUsersFound(UserProfile profile);

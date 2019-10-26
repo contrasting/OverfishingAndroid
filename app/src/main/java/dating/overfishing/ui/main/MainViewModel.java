@@ -61,4 +61,8 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
     public void onMoreUsersFound(UserProfile profile) {
         mCurrentProfile.setValue(profile);
     }
+
+    public UserProfile getPinnedProfile() {
+        return mDataProvider.getPinnedUser();
+    }
 }

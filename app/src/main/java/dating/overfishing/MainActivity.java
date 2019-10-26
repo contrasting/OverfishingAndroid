@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dating.overfishing.data.UserProfile;
 import dating.overfishing.ui.main.ChatsFragment;
+import dating.overfishing.ui.main.FavouritesFragment;
 import dating.overfishing.ui.main.FiltersFragment;
 import dating.overfishing.ui.main.MainViewModel;
 import dating.overfishing.ui.main.NoUsersFragment;
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_chats:
                     if (mActiveFragment.getClass() != ChatsFragment.class) {
                         mActiveFragment = ChatsFragment.newInstance();
+                        displayActiveFragment();
+                    }
+                    break;
+                case R.id.action_favourites:
+                    if (mActiveFragment.getClass() != FavouritesFragment.class) {
+                        mActiveFragment = FavouritesFragment.newInstance();
                         displayActiveFragment();
                     }
                     break;
