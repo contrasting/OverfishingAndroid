@@ -13,11 +13,8 @@
         android:id="@+id/liked_no_users"
         />
 
-    <!--  margin should be half of @dimen/user_card_margin
-     for consistent spacing  -->
-
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="2.5dp"
+        android:layout_margin="@dimen/user_card_margin"
         android:id="@+id/liked_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

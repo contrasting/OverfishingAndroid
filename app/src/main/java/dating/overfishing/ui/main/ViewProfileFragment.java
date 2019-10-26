@@ -18,14 +18,6 @@ public class ViewProfileFragment extends AbstractViewProfileFragment {
         return new ViewProfileFragment();
     }
 
-    public static ViewProfileFragment newInstance(UserProfile profile) {
-        Bundle args = new Bundle();
-        args.putSerializable(PROFILE, profile);
-        ViewProfileFragment vpf = new ViewProfileFragment();
-        vpf.setArguments(args);
-        return vpf;
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

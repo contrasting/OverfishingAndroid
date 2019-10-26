@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.favourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import dating.overfishing.R;
 import dating.overfishing.data.UserProfile;
+import dating.overfishing.ui.main.AbstractViewProfileFragment;
 
 public class PinnedProfileFragment extends AbstractViewProfileFragment {
 

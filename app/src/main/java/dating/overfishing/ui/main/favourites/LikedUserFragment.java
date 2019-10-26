@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.favourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import java.util.List;
 
 import dating.overfishing.R;
 import dating.overfishing.data.UserProfile;
+import dating.overfishing.ui.main.MainViewModel;
 
 public class LikedUserFragment extends Fragment {
 
@@ -33,6 +34,7 @@ public class LikedUserFragment extends Fragment {
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
         List<UserProfile> likedUsersList = mViewModel.getLikedUsers();
+
         if (likedUsersList.isEmpty()) {
             mNoUsers.setVisibility(View.VISIBLE);
         } else {

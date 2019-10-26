@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.favourites;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +20,7 @@ import java.util.List;
 import dating.overfishing.R;
 import dating.overfishing.ViewProfileActivity;
 import dating.overfishing.data.UserProfile;
+import dating.overfishing.ui.main.AbstractViewProfileFragment;
 
 public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.LikedViewHolder> {
 
@@ -61,8 +62,11 @@ public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.Like
             mName = itemView.findViewById(R.id.item_liked_name);
             mImage = itemView.findViewById(R.id.item_liked_image);
             mImage.setOnClickListener(v -> {
-                if (mUserProfile != null)
-                    itemView.getContext().startActivity(new Intent(itemView.getContext(), ViewProfileActivity.class));
+                if (mUserProfile != null) {
+                    Intent i = new Intent(itemView.getContext(), ViewProfileActivity.class);
+                    i.putExtra(AbstractViewProfileFragment.PROFILE, mUserProfile);
+                    itemView.getContext().startActivity(i);
+                }
             });
         }
 

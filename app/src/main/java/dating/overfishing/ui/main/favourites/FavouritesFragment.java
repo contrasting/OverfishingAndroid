@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.favourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

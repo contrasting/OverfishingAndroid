@@ -87,6 +87,7 @@
                or title will not appear  -->
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/view_profile_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"

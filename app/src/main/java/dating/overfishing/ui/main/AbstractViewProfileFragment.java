@@ -118,6 +118,7 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
             public void onPageSelected(int position) {
                 if (mPagerAdapter.getPaletteAt(position) != null) {
                     mToolbarLayout.setExpandedTitleColor(mPagerAdapter.getPaletteAt(position).getVibrantColor(Color.WHITE));
+                    setPalette(mPagerAdapter.getPaletteAt(position));
                 }
             }
 
@@ -128,6 +129,10 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
 
     protected abstract View getRootView(LayoutInflater inflater, ViewGroup container);
 
+    protected void setPalette(Palette palette) {
+        // override as needed
+    }
+
     public static int getThemeAttribute(int attr, final Context context) {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(attr, value, true);
@@ -137,5 +142,6 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
     @Override
     public void onPaletteLoaded(Palette palette) {
         mToolbarLayout.setExpandedTitleColor(palette.getVibrantColor(Color.WHITE));
+        setPalette(palette);
     }
 }
