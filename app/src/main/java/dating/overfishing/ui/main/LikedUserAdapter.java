@@ -1,5 +1,6 @@
 package dating.overfishing.ui.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,18 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.github.florent37.glidepalette.BitmapPalette;
 import com.github.florent37.glidepalette.GlidePalette;
 
 import java.util.List;
 
 import dating.overfishing.R;
+import dating.overfishing.ViewProfileActivity;
 import dating.overfishing.data.UserProfile;
 
 public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.LikedViewHolder> {
@@ -55,14 +54,20 @@ public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.Like
 
         private TextView mName;
         private ImageView mImage;
+        private UserProfile mUserProfile;
 
         public LikedViewHolder(@NonNull View itemView) {
             super(itemView);
             mName = itemView.findViewById(R.id.item_liked_name);
             mImage = itemView.findViewById(R.id.item_liked_image);
+            mImage.setOnClickListener(v -> {
+                if (mUserProfile != null)
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), ViewProfileActivity.class));
+            });
         }
 
         public void bind(UserProfile profile) {
+            mUserProfile = profile;
             mName.setText(profile.getName() + ", " + profile.getAge());
             Glide.with(itemView.getContext())
                     .load(profile.getProfileImages().get(0))

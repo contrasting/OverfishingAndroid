@@ -18,11 +18,26 @@ public class ViewProfileFragment extends AbstractViewProfileFragment {
         return new ViewProfileFragment();
     }
 
+    public static ViewProfileFragment newInstance(UserProfile profile) {
+        Bundle args = new Bundle();
+        args.putSerializable(PROFILE, profile);
+        ViewProfileFragment vpf = new ViewProfileFragment();
+        vpf.setArguments(args);
+        return vpf;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        UserProfile profile = mViewModel.getCurrentProfile().getValue();
+        UserProfile profile;
+
+        if (getArguments() != null) {
+            profile = (UserProfile) getArguments().getSerializable(PROFILE);
+        } else {
+            // if not passed from bundle then get from ViewModel
+            profile = mViewModel.getCurrentProfile().getValue();
+        }
 
         // should not be null
         if (profile != null) {

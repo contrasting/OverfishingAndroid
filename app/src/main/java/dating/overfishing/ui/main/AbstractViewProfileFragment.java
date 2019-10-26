@@ -26,6 +26,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public abstract class AbstractViewProfileFragment extends Fragment implements ProfileImageAdapter.PaletteListener {
 
+    public static final String PROFILE = "profile";
     protected MainViewModel mViewModel;
     protected TextView mDistance;
     protected TextView mAbout;

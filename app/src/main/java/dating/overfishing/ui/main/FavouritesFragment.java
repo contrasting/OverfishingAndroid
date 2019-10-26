@@ -29,7 +29,10 @@ public class FavouritesFragment extends Fragment {
         TabLayout tabLayout = rootView.findViewById(R.id.favourites_tabs);
         ViewPager viewpager = rootView.findViewById(R.id.favourites_pager);
         tabLayout.setupWithViewPager(viewpager);
-        viewpager.setAdapter(new FavouritesAdapter(getFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+
+        // note must be ChildFragmentManager, or will be blank on return
+        // https://stackoverflow.com/questions/42671729/viewpager-from-fragment-returns-blank
+        viewpager.setAdapter(new FavouritesAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
         return rootView;
     }
