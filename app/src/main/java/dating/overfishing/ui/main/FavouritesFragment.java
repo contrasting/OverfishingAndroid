@@ -63,7 +63,7 @@ public class FavouritesFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             if (position == 0) {
-                return "Liked";
+                return "Liked You";
             } else {
                 return "Pinned";
             }

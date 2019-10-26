@@ -1,6 +1,7 @@
 package dating.overfishing.data;
 
 import java.util.ArrayDeque;
+import java.util.List;
 import java.util.Queue;
 
 public class RealUserData implements UserDataProvider {
@@ -44,6 +45,11 @@ public class RealUserData implements UserDataProvider {
 
     @Override
     public UserProfile getPinnedUser() {
+        return null;
+    }
+
+    @Override
+    public List<UserProfile> getLikedUsers() {
         return null;
     }
 }

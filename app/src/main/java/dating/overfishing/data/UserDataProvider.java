@@ -1,5 +1,7 @@
 package dating.overfishing.data;
 
+import java.util.List;
+
 public interface UserDataProvider {
 
     // if no action, retrieve the last
@@ -23,6 +25,8 @@ public interface UserDataProvider {
     void getMoreUsers(Filters filters);
 
     UserProfile getPinnedUser();
+
+    List<UserProfile> getLikedUsers();
 
     // callback to host
     interface Listener {

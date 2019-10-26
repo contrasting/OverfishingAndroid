@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
 import dating.overfishing.data.FakeUserData;
 import dating.overfishing.data.Filters;
 import dating.overfishing.data.UserDataProvider;
@@ -64,5 +66,9 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
 
     public UserProfile getPinnedProfile() {
         return mDataProvider.getPinnedUser();
+    }
+
+    public List<UserProfile> getLikedUsers() {
+        return mDataProvider.getLikedUsers();
     }
 }
