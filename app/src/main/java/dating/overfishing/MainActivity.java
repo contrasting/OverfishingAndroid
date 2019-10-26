@@ -1,11 +1,13 @@
 package dating.overfishing;
 
 import android.os.Bundle;
+import android.view.Gravity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.transition.Fade;
+import androidx.transition.Slide;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,7 +22,7 @@ import dating.overfishing.ui.main.ViewProfileFragment;
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mViewModel;
-    private Class<? extends Fragment> mActiveFragmentClass;
+    private Fragment mActiveFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +31,31 @@ public class MainActivity extends AppCompatActivity {
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mViewModel.getCurrentProfile().observe(this, this::displayDiscover);
-        mActiveFragmentClass = ViewProfileFragment.class;
 
         ((BottomNavigationView) findViewById(R.id.bottom_nav_view)).setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_discover:
-                    if (mActiveFragmentClass != ViewProfileFragment.class) {
+                    if (mActiveFragment.getClass() != ViewProfileFragment.class) {
                         // TODO track whether filters have changed, if so refresh
                         displayDiscover(mViewModel.getCurrentProfile().getValue());
-                        mActiveFragmentClass = ViewProfileFragment.class;
                     }
                     break;
                 case R.id.action_profile:
-                    if (mActiveFragmentClass != OwnProfileFragment.class) {
-                        displayFragment(OwnProfileFragment.newInstance());
-                        mActiveFragmentClass = OwnProfileFragment.class;
+                    if (mActiveFragment.getClass() != OwnProfileFragment.class) {
+                        mActiveFragment = OwnProfileFragment.newInstance();
+                        displayActiveFragment();
                     }
                     break;
                 case R.id.action_filters:
-                    if (mActiveFragmentClass != FiltersFragment.class) {
-                        displayFragment(FiltersFragment.newInstance());
-                        mActiveFragmentClass = FiltersFragment.class;
+                    if (mActiveFragment.getClass() != FiltersFragment.class) {
+                        mActiveFragment = FiltersFragment.newInstance();
+                        displayActiveFragment();
                     }
                     break;
                 case R.id.action_chats:
-                    if (mActiveFragmentClass != ChatsFragment.class) {
-                        displayFragment(ChatsFragment.newInstance());
-                        mActiveFragmentClass = ChatsFragment.class;
+                    if (mActiveFragment.getClass() != ChatsFragment.class) {
+                        mActiveFragment = ChatsFragment.newInstance();
+                        displayActiveFragment();
                     }
                     break;
                 default:
@@ -65,19 +65,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayDiscover(UserProfile profile) {
+
+        if (profile == null) {
+            mActiveFragment = NoUsersFragment.newInstance();
+            displayActiveFragment();
+        } else {
+            Fade fade = new Fade();
+            fade.setDuration(200);
+            Slide slide = new Slide(Gravity.BOTTOM);
+            slide.setStartDelay(400);
+            slide.setDuration(300);
+            Fragment fragment = ViewProfileFragment.newInstance();
+            displayFragmentWithTransition(fragment, fade, slide);
+        }
+    }
+
+    private void displayActiveFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(
-                        R.id.container, profile != null ? ViewProfileFragment.newInstance() : NoUsersFragment.newInstance()
-                )
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.container, mActiveFragment)
                 .commit();
     }
 
-    private void displayFragment(Fragment fragment) {
+    // https://medium.com/bynder-tech/how-to-use-material-transitions-in-fragment-transactions-5a62b9d0b26b
+
+    private void displayFragmentWithTransition(Fragment fragment, Object exitTransition, Object enterTransition) {
+
+        // exit transition first
+        if (mActiveFragment!= null && exitTransition != null) mActiveFragment.setExitTransition(exitTransition);
+        if (enterTransition != null) fragment.setEnterTransition(enterTransition);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
+        mActiveFragment = fragment;
     }
 }
