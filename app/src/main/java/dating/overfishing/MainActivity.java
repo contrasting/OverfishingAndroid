@@ -12,7 +12,7 @@ import androidx.transition.Slide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dating.overfishing.data.UserProfile;
-import dating.overfishing.ui.main.ChatsFragment;
+import dating.overfishing.ui.main.chats.ChatsFragment;
 import dating.overfishing.ui.main.favourites.FavouritesFragment;
 import dating.overfishing.ui.main.FiltersFragment;
 import dating.overfishing.ui.main.MainViewModel;

@@ -4,7 +4,7 @@
         android:title="Discover"
         android:icon="@drawable/ic_fish"/>
     <item android:id="@+id/action_favourites"
-        android:title="Favourites"
+        android:title="@string/favourites"
         android:icon="@drawable/ic_favorite_24dp"/>
     <item android:id="@+id/action_chats"
         android:title="Chats"

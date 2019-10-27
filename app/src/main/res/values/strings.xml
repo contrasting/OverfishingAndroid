@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Overfishing</string>
+    <string name="favourites">Collection</string>
 </resources>

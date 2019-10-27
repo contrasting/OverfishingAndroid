@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.chats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import java.util.List;
 
 import dating.overfishing.R;
 import dating.overfishing.data.Conversation;
+import dating.overfishing.ui.main.MainViewModel;
 import dating.overfishing.views.LeftInsetDividerDecoration;
 
 public class ChatsFragment extends Fragment {

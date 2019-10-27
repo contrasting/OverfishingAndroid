@@ -1,4 +1,4 @@
-package dating.overfishing.ui.main;
+package dating.overfishing.ui.main.chats;
 
 import android.view.LayoutInflater;
 import android.view.View;
