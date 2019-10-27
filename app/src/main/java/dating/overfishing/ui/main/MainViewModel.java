@@ -8,6 +8,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import dating.overfishing.data.ChatDataProvider;
+import dating.overfishing.data.Conversation;
+import dating.overfishing.data.FakeChatData;
 import dating.overfishing.data.FakeUserData;
 import dating.overfishing.data.Filters;
 import dating.overfishing.data.UserDataProvider;
@@ -15,39 +18,40 @@ import dating.overfishing.data.UserProfile;
 
 public class MainViewModel extends AndroidViewModel implements UserDataProvider.Listener {
 
+    // TODO replace with real
+    private UserDataProvider mUserDataProvider = new FakeUserData(this);
+    private ChatDataProvider mChatDataProvider = new FakeChatData();
+
     // TODO need to check whether network connection
 
     private MutableLiveData<UserProfile> mCurrentProfile = new MutableLiveData<>();
 
     public MainViewModel(Application application) {
         super(application);
-        mCurrentProfile.postValue(mDataProvider.getLast());
+        mCurrentProfile.postValue(mUserDataProvider.getLast());
     }
 
-    // TODO replace with real
-    private UserDataProvider mDataProvider = new FakeUserData(this);
-
     public void passUser(String userId) {
-        mDataProvider.passUserWithId(userId);
+        mUserDataProvider.passUserWithId(userId);
         nextUser();
     }
 
     public void likeUser(String userId) {
-        mDataProvider.likeUserWithId(userId, null);
+        mUserDataProvider.likeUserWithId(userId, null);
         nextUser();
     }
 
     public void pinUser(String userId) {
-        mDataProvider.pinUserWithId(userId);
+        mUserDataProvider.pinUserWithId(userId);
         nextUser();
     }
 
     private void nextUser() {
-        mCurrentProfile.setValue(mDataProvider.moveOnToNext());
+        mCurrentProfile.setValue(mUserDataProvider.moveOnToNext());
     }
 
     public UserProfile getOwnProfile() {
-        return mDataProvider.getOwnProfile();
+        return mUserDataProvider.getOwnProfile();
     }
 
     // Note we do not expose MutableLiveData but only LiveData
@@ -56,7 +60,7 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
     }
 
     public void refresh() {
-        mDataProvider.getMoreUsers(new Filters(getApplication()));
+        mUserDataProvider.getMoreUsers(new Filters(getApplication()));
     }
 
     @Override
@@ -65,10 +69,14 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
     }
 
     public UserProfile getPinnedProfile() {
-        return mDataProvider.getPinnedUser();
+        return mUserDataProvider.getPinnedUser();
     }
 
     public List<UserProfile> getLikedUsers() {
-        return mDataProvider.getLikedUsers();
+        return mUserDataProvider.getLikedUsers();
+    }
+
+    public List<Conversation> getChats() {
+        return mChatDataProvider.getConversations();
     }
 }
