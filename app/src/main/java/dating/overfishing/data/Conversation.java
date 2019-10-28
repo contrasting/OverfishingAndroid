@@ -5,13 +5,15 @@ import java.io.Serializable;
 public class Conversation implements Serializable {
 
     private String mConversationID;
+    private String mOtherID;
     private Long mLastMessageTime;
     private String mOtherName;
     private String mLastMessage;
     private String mProfileImage;
 
-    public Conversation(String conversationID, Long lastMessageTime, String otherName, String lastMessage, String profileImage) {
+    public Conversation(String conversationID, String otherID, Long lastMessageTime, String otherName, String lastMessage, String profileImage) {
         mConversationID = conversationID;
+        mOtherID = otherID;
         mLastMessageTime = lastMessageTime;
         mOtherName = otherName;
         mLastMessage = lastMessage;
@@ -36,5 +38,9 @@ public class Conversation implements Serializable {
 
     public String getProfileImage() {
         return mProfileImage;
+    }
+
+    public String getOtherID() {
+        return mOtherID;
     }
 }

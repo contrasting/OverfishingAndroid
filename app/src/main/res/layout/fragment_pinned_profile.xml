@@ -7,4 +7,6 @@
 
     <include layout="@layout/item_catch_button" />
 
+    <include layout="@layout/item_pass_button" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

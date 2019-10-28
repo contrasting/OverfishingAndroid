@@ -22,14 +22,7 @@ public class ViewProfileFragment extends AbstractViewProfileFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        UserProfile profile;
-
-        if (getArguments() != null) {
-            profile = (UserProfile) getArguments().getSerializable(PROFILE);
-        } else {
-            // if not passed from bundle then get from ViewModel
-            profile = mViewModel.getCurrentProfile().getValue();
-        }
+        UserProfile profile = mViewModel.getCurrentProfile().getValue();
 
         // should not be null
         if (profile != null) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/fab_padding"
+    android:layout_gravity="bottom"
+    android:src="@drawable/ic_close_24dp"
+    android:backgroundTint="?colorPrimary"
+    android:id="@+id/view_profile_no"/>

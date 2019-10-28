@@ -64,6 +64,7 @@ public class LikedUserAdapter extends RecyclerView.Adapter<LikedUserAdapter.Like
             mImage.setOnClickListener(v -> {
                 if (mUserProfile != null) {
                     Intent i = new Intent(itemView.getContext(), ViewProfileActivity.class);
+                    i.putExtra(ViewProfileActivity.SHOW_BUTTONS, true);
                     i.putExtra(AbstractViewProfileFragment.PROFILE, mUserProfile);
                     itemView.getContext().startActivity(i);
                 }

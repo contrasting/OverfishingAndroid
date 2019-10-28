@@ -52,4 +52,9 @@ public class RealUserData implements UserDataProvider {
     public List<UserProfile> getLikedUsers() {
         return null;
     }
+
+    @Override
+    public UserProfile getProfileFromId(String otherID) {
+        return null;
+    }
 }

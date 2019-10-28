@@ -79,4 +79,8 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
     public List<Conversation> getChats() {
         return mChatDataProvider.getConversations();
     }
+
+    public UserProfile getProfileFromId(String otherID) {
+        return mUserDataProvider.getProfileFromId(otherID);
+    }
 }
