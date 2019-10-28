@@ -1,6 +1,8 @@
 package dating.overfishing.data;
 
-public class Conversation {
+import java.io.Serializable;
+
+public class Conversation implements Serializable {
 
     private String mConversationID;
     private Long mLastMessageTime;

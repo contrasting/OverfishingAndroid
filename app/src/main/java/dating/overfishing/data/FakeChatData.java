@@ -7,17 +7,17 @@ public class FakeChatData implements ChatDataProvider {
     @Override
     public List<Conversation> getConversations() {
         List<Conversation> conversations = new ArrayList<>();
-        conversations.add(new Conversation(null,
+        conversations.add(new Conversation("abc",
                 1572120745000L,
                 "Olivia",
                 "Hi I miss you",
                 "https://a.wattpad.com/cover/60596436-352-k319779.jpg"));
-        conversations.add(new Conversation(null,
+        conversations.add(new Conversation("abc",
                 1572120775000L,
                 "Adam",
                 "lol hahaha you suck",
                 "https://www.pitango.com//data/upl/team/Ezekiel-Guy-370X550_strip.png"));
-        conversations.add(new Conversation(null,
+        conversations.add(new Conversation("abc",
                 1572120775000L,
                 "Argha",
                 "Hmm Indian girls yeah",

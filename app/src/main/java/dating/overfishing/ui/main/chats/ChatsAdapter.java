@@ -1,5 +1,6 @@
 package dating.overfishing.ui.main.chats;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import dating.overfishing.data.Conversation;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatViewHolder> {
 
+    public static final String CONVERSATION = "conversation";
     private List<Conversation> mConversations;
 
     @NonNull
@@ -50,6 +52,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatViewHold
         private ImageView mImage;
         private TextView mName;
         private TextView mLastMessage;
+        private Conversation mConversation;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,9 +60,18 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatViewHold
             mImage = itemView.findViewById(R.id.item_conversation_image);
             mName = itemView.findViewById(R.id.item_conversation_name);
             mLastMessage = itemView.findViewById(R.id.item_conversation_last_message);
+
+            itemView.setOnClickListener(v -> {
+                if (mConversation != null) {
+                    Intent i = new Intent(itemView.getContext(), ChatActivity.class);
+                    i.putExtra(CONVERSATION, mConversation);
+                    itemView.getContext().startActivity(i);
+                }
+            });
         }
 
         public void bind(Conversation conversation) {
+            mConversation = conversation;
             mName.setText(conversation.getOtherName());
             mLastMessage.setText(conversation.getLastMessage());
             Glide.with(itemView.getContext())
