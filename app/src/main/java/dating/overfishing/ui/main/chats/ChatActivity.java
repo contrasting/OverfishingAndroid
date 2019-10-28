@@ -48,7 +48,7 @@ public class ChatActivity extends AppCompatActivity {
             toolbar.setTitle("   " + conversation.getOtherName());
             toolbar.setOnClickListener(v -> {
                 Intent i = new Intent(this, ViewProfileActivity.class);
-                i.putExtra(PROFILE, mViewModel.getProfileFromId(conversation.getOtherID()));
+                i.putExtra(PROFILE, conversation.getOtherProfile());
                 startActivity(i);
             });
             setSupportActionBar(toolbar);

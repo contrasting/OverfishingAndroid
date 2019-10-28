@@ -5,19 +5,15 @@ import java.io.Serializable;
 public class Conversation implements Serializable {
 
     private String mConversationID;
-    private String mOtherID;
+    private UserProfile mOtherProfile;
     private Long mLastMessageTime;
-    private String mOtherName;
     private String mLastMessage;
-    private String mProfileImage;
 
-    public Conversation(String conversationID, String otherID, Long lastMessageTime, String otherName, String lastMessage, String profileImage) {
+    public Conversation(String conversationID, UserProfile otherProfile, Long lastMessageTime, String lastMessage) {
         mConversationID = conversationID;
-        mOtherID = otherID;
+        mOtherProfile = otherProfile;
         mLastMessageTime = lastMessageTime;
-        mOtherName = otherName;
         mLastMessage = lastMessage;
-        mProfileImage = profileImage;
     }
 
     public String getConversationID() {
@@ -29,7 +25,7 @@ public class Conversation implements Serializable {
     }
 
     public String getOtherName() {
-        return mOtherName;
+        return mOtherProfile.getName();
     }
 
     public String getLastMessage() {
@@ -37,10 +33,10 @@ public class Conversation implements Serializable {
     }
 
     public String getProfileImage() {
-        return mProfileImage;
+        return mOtherProfile.getProfileImages().get(0);
     }
 
-    public String getOtherID() {
-        return mOtherID;
+    public UserProfile getOtherProfile() {
+        return mOtherProfile;
     }
 }
