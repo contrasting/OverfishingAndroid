@@ -25,4 +25,9 @@ public class FakeChatData implements ChatDataProvider {
         ));
         return conversations;
     }
+
+    @Override
+    public void sendMessage(String message) {
+
+    }
 }

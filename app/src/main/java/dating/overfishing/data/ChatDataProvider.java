@@ -5,4 +5,6 @@ import java.util.List;
 public interface ChatDataProvider {
 
     List<Conversation> getConversations();
+
+    void sendMessage(String message);
 }
