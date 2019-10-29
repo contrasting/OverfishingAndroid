@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Overfishing</string>
     <string name="favourites">Collection</string>
+    <string name="title"><font color='#4881C2'>overfishing</font>.dating</string>
 </resources>
