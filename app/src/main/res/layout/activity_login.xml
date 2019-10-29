@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login_layout"
+    android:background="@drawable/gradient_list"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintGuide_percent="0.17"
         android:id="@+id/guide_title"
         android:orientation="horizontal"
         />
