@@ -39,6 +39,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        Conversation conversation = (Conversation) getIntent().getSerializableExtra(CONVERSATION);
+
+        setActionBar(conversation);
+
         mViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         mRecyclerView = findViewById(R.id.messages_recycler);
@@ -46,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         findViewById(R.id.send_button).setOnClickListener(v -> sendMessage());
 
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mMessageAdapter = new MessageAdapter();
+        mMessageAdapter = new MessageAdapter(conversation.getProfileImage());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mMessageAdapter);
 
@@ -70,9 +74,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        Conversation conversation = (Conversation) getIntent().getSerializableExtra(CONVERSATION);
-
-        setActionBar(conversation);
+        mViewModel.mMessageData.observe(this, mMessageAdapter::submitList);
     }
 
     private void sendMessage() {

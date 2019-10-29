@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/content_profile"/>
 
@@ -15,6 +16,7 @@
         android:layout_margin="@dimen/fab_padding"
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_material_pin"
+        app:tint="?colorPrimary"
         android:backgroundTint="@android:color/holo_green_dark"
         android:id="@+id/view_profile_pin"
         />
