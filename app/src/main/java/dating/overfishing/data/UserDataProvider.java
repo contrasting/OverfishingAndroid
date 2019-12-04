@@ -31,11 +31,11 @@ public interface UserDataProvider {
     @NonNull
     List<UserProfile> getLikedUsers();
 
-    // TODO async?
-    UserProfile getProfileFromId(String otherID);
+    void getProfileFromId(String otherID);
 
     // callback to host
     interface Listener {
         void onMoreUsersFound(UserProfile profile);
+        void onUserWithIdFound(UserProfile profile);
     }
 }

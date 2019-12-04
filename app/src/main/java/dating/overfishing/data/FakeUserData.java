@@ -92,8 +92,8 @@ public class FakeUserData implements UserDataProvider {
     }
 
     @Override
-    public UserProfile getProfileFromId(String otherID) {
-        return getArgha();
+    public void getProfileFromId(String otherID) {
+        mListener.onUserWithIdFound(getArgha());
     }
 
     public static UserProfile getArgha() {

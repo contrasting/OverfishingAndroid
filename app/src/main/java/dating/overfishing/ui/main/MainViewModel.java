@@ -13,13 +13,14 @@ import dating.overfishing.data.Conversation;
 import dating.overfishing.data.FakeChatData;
 import dating.overfishing.data.FakeUserData;
 import dating.overfishing.data.Filters;
+import dating.overfishing.data.RealUserData;
 import dating.overfishing.data.UserDataProvider;
 import dating.overfishing.data.UserProfile;
 
 public class MainViewModel extends AndroidViewModel implements UserDataProvider.Listener {
 
     // TODO replace with real
-    private UserDataProvider mUserDataProvider = new FakeUserData(this);
+    private UserDataProvider mUserDataProvider = new RealUserData(this);
     private ChatDataProvider mChatDataProvider = new FakeChatData();
 
     // TODO need to check whether network connection
@@ -28,7 +29,8 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
 
     public MainViewModel(Application application) {
         super(application);
-        mCurrentProfile.postValue(mUserDataProvider.getLast());
+        // mCurrentProfile.postValue(mUserDataProvider.getLast());
+        mUserDataProvider.getProfileFromId(RealUserData.ARGHA_ID);
     }
 
     public void passUser(String userId) {
@@ -68,6 +70,11 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
         mCurrentProfile.setValue(profile);
     }
 
+    @Override
+    public void onUserWithIdFound(UserProfile profile) {
+        mCurrentProfile.postValue(profile);
+    }
+
     public UserProfile getPinnedProfile() {
         return mUserDataProvider.getPinnedUser();
     }
@@ -80,7 +87,7 @@ public class MainViewModel extends AndroidViewModel implements UserDataProvider.
         return mChatDataProvider.getConversations();
     }
 
-    public UserProfile getProfileFromId(String otherID) {
-        return mUserDataProvider.getProfileFromId(otherID);
+    public void getProfileFromId(String otherID) {
+        mUserDataProvider.getProfileFromId(otherID);
     }
 }
