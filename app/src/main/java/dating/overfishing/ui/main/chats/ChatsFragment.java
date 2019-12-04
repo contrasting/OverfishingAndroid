@@ -23,6 +23,7 @@ public class ChatsFragment extends Fragment {
 
     private MainViewModel mViewModel;
     private ChatsAdapter mChatsAdapter;
+    private View mNoChats;
 
     public static ChatsFragment newInstance() {
         return new ChatsFragment();
@@ -36,8 +37,7 @@ public class ChatsFragment extends Fragment {
         List<Conversation> chatsList = mViewModel.getChats();
 
         if (chatsList.isEmpty()) {
-            // TODO
-            // mNoChats.setVisibility(View.VISIBLE);
+            mNoChats.setVisibility(View.VISIBLE);
         } else {
             mChatsAdapter.setConversations(chatsList);
         }
@@ -48,6 +48,7 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_chats, container, false);
 
+        mNoChats = rootView.findViewById(R.id.chats_no_users);
         RecyclerView chatsRecycler = rootView.findViewById(R.id.chats_recycler);
         mChatsAdapter = new ChatsAdapter();
         chatsRecycler.setAdapter(mChatsAdapter);

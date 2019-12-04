@@ -35,8 +35,8 @@ public class FakeUserData implements UserDataProvider {
                 "Olivia",
                 23,
                 3,
-                "Oh my god this is so ah wtefa; sldkfj!!!",
-                "University of Wfoslefj"
+                "Oh my god this is so cool haha!!!",
+                "University of Wroclaw"
         );
     }
 
@@ -109,8 +109,8 @@ public class FakeUserData implements UserDataProvider {
 
     public static UserProfile getFred() {
         return new UserProfile(new ArrayList<>(
-                Arrays.asList("https://petapixel.com/assets/uploads/2019/02/mooncompositemain-800x800.jpg",
-                        "https://i5.walmartimages.com/asr/49d44f88-30e4-4bdd-a89d-74f795d3efdc_1.4739ce0b7de1063bc98c6091137e7ad3.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF")),
+                Arrays.asList("https://scontent.flis5-1.fna.fbcdn.net/v/t1.0-9/48995983_10161446075920314_7922672724911063040_o.jpg?_nc_cat=105&_nc_oc=AQlyq3C81_eXEzEsR69GWcV_H409YYn6sX41CswXP6tNmRHOVPW2qWdrnUYlrEw5prkYyyXmnjAMjyLfU426eHKH&_nc_ht=scontent.flis5-1.fna&oh=e55658c66cfc21edcfa3744d0bd3e285&oe=5E62E64D",
+                        "https://scontent.flis5-1.fna.fbcdn.net/v/t31.0-8/26197928_10160001433390314_322605889162436410_o.jpg?_nc_cat=108&_nc_oc=AQlzGdq6vLtRSzpNhb6xDZLoN7_lv5tefKzDPmg1dLG5zv6UuTiE1m2-Nf2mF1_2rH7qLP2VEFseYRAh-yzuGo0H&_nc_ht=scontent.flis5-1.fna&oh=33ca43624e6c442d1a8ab0fa9b004d2a&oe=5E4E4128")),
                 "Fred",
                 25,
                 5,
