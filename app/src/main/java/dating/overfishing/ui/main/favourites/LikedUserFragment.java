@@ -35,7 +35,7 @@ public class LikedUserFragment extends Fragment {
 
         List<UserProfile> likedUsersList = mViewModel.getLikedUsers();
 
-        if (likedUsersList.isEmpty()) {
+        if (likedUsersList == null || likedUsersList.isEmpty()) {
             mNoUsers.setVisibility(View.VISIBLE);
         } else {
             mAdapter.setUserProfiles(likedUsersList);

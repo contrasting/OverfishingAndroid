@@ -19,7 +19,6 @@ import dating.overfishing.data.UserProfile;
 
 public class MainViewModel extends AndroidViewModel implements UserDataProvider.Listener {
 
-    // TODO replace with real
     private UserDataProvider mUserDataProvider = new RealUserData(this);
     private ChatDataProvider mChatDataProvider = new FakeChatData();
 
