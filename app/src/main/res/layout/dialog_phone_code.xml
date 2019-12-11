@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding_master"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the verification code we sent you:"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/padding_master"/>
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/phone_code_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        app:pinLineStroke="2dp"
+        app:pinLineStrokeSelected="4dp"/>
+
+    <TextView
+        android:layout_marginTop="@dimen/padding_master"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone_code_invalid"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        android:text="Hmm... that doesn't match."/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_master"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="true"
+        android:id="@+id/code_progress_bar"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

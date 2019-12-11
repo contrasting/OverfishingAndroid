@@ -2,4 +2,7 @@
     <string name="app_name">Overfishing</string>
     <string name="favourites">Collection</string>
     <string name="title"><font color='#4881C2'>overfishing</font>.dating</string>
+
+    <string name="phone_message">By tapping "Continue", we will send you a text with a verification code.
+    Message and data rates may apply.</string>
 </resources>
