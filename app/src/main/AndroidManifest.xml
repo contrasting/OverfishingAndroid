@@ -11,7 +11,15 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+
+
+        android:usesCleartextTraffic="true"
+
+        >
+
+<!--        TODO: Remove "usesCleartextTraffic"-->
+
         <activity android:name=".login.PhoneLoginActivity"
             android:screenOrientation="portrait"/>
         <activity
