@@ -31,6 +31,7 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
     protected TextView mDistance;
     protected TextView mAbout;
     protected TextView mSchool;
+    protected TextView mOccupation;
     protected CollapsingToolbarLayout mToolbarLayout;
     private ViewPager mProfilePager;
     private CircleIndicator mIndicator;
@@ -58,6 +59,7 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
 
         mDistance = addField(R.drawable.ic_location_on_24dp, inflater, itemsContainer);
         mSchool = addField(R.drawable.ic_school_24dp, inflater, itemsContainer);
+        mOccupation = addField(R.drawable.ic_job_24dp, inflater, itemsContainer);
 
         return rootView;
     }
@@ -92,6 +94,11 @@ public abstract class AbstractViewProfileFragment extends Fragment implements Pr
         if (profile.getSchool() != null) {
             mSchool.setText(profile.getSchool());
             mSchool.setVisibility(View.VISIBLE);
+        }
+
+        if (profile.getOccupation() != null) {
+            mOccupation.setText(profile.getOccupation());
+            mOccupation.setVisibility(View.VISIBLE);
         }
     }
 

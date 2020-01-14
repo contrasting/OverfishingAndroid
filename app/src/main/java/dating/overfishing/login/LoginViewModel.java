@@ -99,7 +99,10 @@ public class LoginViewModel extends ViewModel {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            //FirebaseUser user = task.getResult().getUser();
+                            task.getResult().getUser().getIdToken(true).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful())
+                                    Log.e(TAG, task1.getResult().getToken());
+                            });
 
                             // if (mPreferences.getBoolean("push_notifications", true)) {
                             //     generateNewFirebaseInstanceId();
