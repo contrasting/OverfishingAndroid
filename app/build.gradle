@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "dating.overfishing"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -47,6 +47,8 @@ dependencies {
         exclude group: 'androidx.appcompat', module: 'appcompat'
     }
     implementation 'net.rimoto:intlphoneinput:1.0.1'
+
+    implementation 'com.magnet.api:authapi:0.1.1'
 
     // networking
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'

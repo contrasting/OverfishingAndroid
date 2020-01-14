@@ -16,6 +16,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.magnet.apis.auth.clients.AuthClient;
+import com.magnet.apis.auth.exceptions.AuthEndpointUnreachableException;
+import com.magnet.apis.auth.responses.LoginResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -100,8 +103,11 @@ public class LoginViewModel extends ViewModel {
                             // Sign in success, update UI with the signed-in user's information
 
                             task.getResult().getUser().getIdToken(true).addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful())
-                                    Log.e(TAG, task1.getResult().getToken());
+                                if (task1.isSuccessful()) {
+                                    String token = task1.getResult().getToken();
+                                    Log.e(TAG, token);
+                                    Log.e(TAG, String.valueOf(isUserRegistered(token)));
+                                }
                             });
 
                             // if (mPreferences.getBoolean("push_notifications", true)) {
@@ -131,6 +137,17 @@ public class LoginViewModel extends ViewModel {
     public void onVerificationCodeEntered(CharSequence code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code.toString());
         signInWithPhoneAuthCredential(credential);
+    }
+
+    public boolean isUserRegistered(String idToken) {
+        AuthClient authClient = new AuthClient("localhost", 8120);
+        try {
+            LoginResponse loginResponse = authClient.validateToken(idToken);
+            return loginResponse.isNewUser();
+        } catch (AuthEndpointUnreachableException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public LiveData<Boolean> isCodeError() {
