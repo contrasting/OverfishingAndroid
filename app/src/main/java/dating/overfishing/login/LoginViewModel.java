@@ -22,12 +22,11 @@ import com.magnet.apis.auth.exceptions.AuthEndpointUnreachableException;
 import com.magnet.apis.auth.responses.LoginResponse;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginViewModel extends ViewModel {
 
-    public final String TAG = getClass().getSimpleName();
+    private static final String TAG = LoginViewModel.class.getSimpleName();
 
     private FirebaseAuth mFirebaseAuth;
 
@@ -144,37 +143,10 @@ public class LoginViewModel extends ViewModel {
         signInWithPhoneAuthCredential(credential);
     }
 
-
     /**
-     *
-     * @param idToken: String Returned by FireBase SDK
-     * @return boolean: Check if the user has gone through the on-boarding process or not.
+     * An AsyncTask to check if the user has been been through the onboarding process.
      */
-    private boolean isUserRegistered(String idToken) {
-
-        try {
-            // Local IP address of my PC
-            final AuthClientOkHttp authClient = new AuthClientOkHttp("192.168.0.22");
-
-            final LoginResponse loginResponse = authClient.validateToken(idToken);
-            Log.e(TAG, loginResponse.toString());
-            return loginResponse.isNewUser();
-        } catch (AuthEndpointUnreachableException e) {
-            e.printStackTrace();
-            return false;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * An AsyncTask Wrapper to run isUserRegisteredMethod.
-     */
-    private class isUserRegisteredTask extends AsyncTask<String, Void, Boolean> {
+    private static final class isUserRegisteredTask extends AsyncTask<String, Void, Boolean> {
 
         protected Boolean doInBackground(String... params) {
             final String idToken = params[0];
@@ -185,6 +157,25 @@ public class LoginViewModel extends ViewModel {
             Log.e(TAG, result.toString());
         }
 
+        /**
+         *
+         * @param idToken: String Returned by FireBase SDK
+         * @return boolean: Check if the user has gone through the on-boarding process or not.
+         */
+        private boolean isUserRegistered(String idToken) {
+
+            try {
+                // Local IP address of my PC
+                final AuthClientOkHttp authClient = new AuthClientOkHttp("192.168.0.22");
+
+                final LoginResponse loginResponse = authClient.validateToken(idToken);
+                Log.e(TAG, loginResponse.toString());
+                return loginResponse.isNewUser();
+            } catch (AuthEndpointUnreachableException | IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 
     public LiveData<Boolean> isCodeError() {
