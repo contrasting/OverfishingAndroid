@@ -1,5 +1,6 @@
 package dating.overfishing.login;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -16,12 +17,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.magnet.apis.auth.clients.AuthClientOkHttp;
+import com.magnet.apis.auth.exceptions.AuthEndpointUnreachableException;
+import com.magnet.apis.auth.responses.LoginResponse;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginViewModel extends ViewModel {
 
-    public final String TAG = getClass().getSimpleName();
+    private static final String TAG = LoginViewModel.class.getSimpleName();
 
     private FirebaseAuth mFirebaseAuth;
 
@@ -99,7 +104,15 @@ public class LoginViewModel extends ViewModel {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            //FirebaseUser user = task.getResult().getUser();
+                            task.getResult().getUser().getIdToken(true).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    String token = task1.getResult().getToken();
+                                    Log.e(TAG, token);
+
+                                    new isUserRegisteredTask().execute(token);
+
+                                }
+                            });
 
                             // if (mPreferences.getBoolean("push_notifications", true)) {
                             //     generateNewFirebaseInstanceId();
@@ -128,6 +141,41 @@ public class LoginViewModel extends ViewModel {
     public void onVerificationCodeEntered(CharSequence code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code.toString());
         signInWithPhoneAuthCredential(credential);
+    }
+
+    /**
+     * An AsyncTask to check if the user has been been through the onboarding process.
+     */
+    private static final class isUserRegisteredTask extends AsyncTask<String, Void, Boolean> {
+
+        protected Boolean doInBackground(String... params) {
+            final String idToken = params[0];
+            return isUserRegistered(idToken);
+        }
+
+        protected void onPostExecute(Boolean result) {
+            Log.e(TAG, result.toString());
+        }
+
+        /**
+         *
+         * @param idToken: String Returned by FireBase SDK
+         * @return boolean: Check if the user has gone through the on-boarding process or not.
+         */
+        private boolean isUserRegistered(String idToken) {
+
+            try {
+                // Local IP address of my PC
+                final AuthClientOkHttp authClient = new AuthClientOkHttp("192.168.0.22");
+
+                final LoginResponse loginResponse = authClient.validateToken(idToken);
+                Log.e(TAG, loginResponse.toString());
+                return loginResponse.isNewUser();
+            } catch (AuthEndpointUnreachableException | IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 
     public LiveData<Boolean> isCodeError() {
